@@ -22,6 +22,10 @@ void exit_error(char *s)
 }
 
 int main (int argc, char *argv[])  {
+
+	int a = system("./dir_init.sh");
+	if (a==-1)
+	exit_error("creation des files");
 	// Déclare un timer, ainsi qu'un recorder qui va contenir les résultats de l'exécution du programme
 
 	timer * t = timer_alloc();
