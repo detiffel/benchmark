@@ -5,7 +5,6 @@
 
 	writev utilisera des buffers de taille définie dans lesquels seront copiés les strings d'une carte de visite.
 	write copiera directement les strings, puis utilisera lseek pour atteindre la zone où sera notée l'information suivante.
-	Pour faire apparaître les différences clairement, le fichier sera écrit 100 fois
 */
 
 #include <stdio.h>
@@ -55,7 +54,7 @@ int main (int argc, char *argv[])
 	recorder* writev_rec = recorder_alloc("writev.csv");
 	recorder* lseek_rec = recorder_alloc("write+lseek.csv");
 
-	int i, err, err1;
+	int i, j, err, err1;
 
 	// WARNING : the following sections are NOT protected against buffer overflows
 	// Do NOT modify this section without keeping it in mind and do NOT use manual input
@@ -115,55 +114,59 @@ int main (int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	// debut benchmark writev
-	start_timer(t);
-	for(i=0;i<100;i++)
-	{
-		// instructions writev
-		err = writev(fd, io_vector, IOVEC_FIELDS);
-	}
-	write_record(writev_rec, i, stop_timer(t));
 
-	if ( err == -1 )
+	for (i = 1 ; i <= 256 ; i++)
 	{
-		perror("in writev()");
-		exit(EXIT_FAILURE);
-	}
+		// debut benchmark writev
+		start_timer(t);
+		for(j=0;j<i;j++)
+		{
+			// instructions writev
+			err = writev(fd, io_vector, IOVEC_FIELDS);
+		}
+		write_record(writev_rec, j, stop_timer(t));
 
-	// debut benchmark write+lseek
+		if ( err == -1 )
+		{
+			perror("in writev()");
+			exit(EXIT_FAILURE);
+		}
 
-	// Remark : the manpage for writev advise not to use it with the stdio functions. This code ignores the warning
-	start_timer(t);
-	for(i=0;i<100;i++)
-	{
-		// instructions write+lseek
-		err = write(fd, nom, nom_len);
-		err1 = lseek(fd, nom_os, SEEK_CUR);
-		err = write(fd, prenom, prenom_len);
-		err1 = lseek(fd, prenom_os, SEEK_CUR);
-		err = write(fd, naissance, naissance_len);
-		err1 = lseek(fd, naissance_os, SEEK_CUR);
-		err = write(fd, etat_civil, etat_civil_len);
-		err1 = lseek(fd, etat_civil_os, SEEK_CUR);
-		err = write(fd, profession, profession_len);
-		err1 = lseek(fd, profession_os, SEEK_CUR);
-		err = write(fd, organisation, organisation_len);
-		err1 = lseek(fd, organisation_os, SEEK_CUR);
-		err = write(fd, telephone, telephone_len);
-		err1 = lseek(fd, telephone_os, SEEK_CUR);
-	}
-	write_record(lseek_rec, i, stop_timer(t));
+		// debut benchmark write+lseek
 
-	if ( err == -1 )
-	{
-		perror("in write()");
-		exit(EXIT_FAILURE);
-	}
+		// Remark : the manpage for writev advise not to use it with the stdio functions. This code ignores the warning
+		start_timer(t);
+		for(j=0;j<i;j++)
+		{
+			// instructions write+lseek
+			err = write(fd, nom, nom_len);
+			err1 = lseek(fd, nom_os, SEEK_CUR);
+			err = write(fd, prenom, prenom_len);
+			err1 = lseek(fd, prenom_os, SEEK_CUR);
+			err = write(fd, naissance, naissance_len);
+			err1 = lseek(fd, naissance_os, SEEK_CUR);
+			err = write(fd, etat_civil, etat_civil_len);
+			err1 = lseek(fd, etat_civil_os, SEEK_CUR);
+			err = write(fd, profession, profession_len);
+			err1 = lseek(fd, profession_os, SEEK_CUR);
+			err = write(fd, organisation, organisation_len);
+			err1 = lseek(fd, organisation_os, SEEK_CUR);
+			err = write(fd, telephone, telephone_len);
+			err1 = lseek(fd, telephone_os, SEEK_CUR);
+		}
+		write_record(lseek_rec, j, stop_timer(t));
 
-	if ( err1 == -1 )
-	{
-		perror("in lseek()");
-		exit(EXIT_FAILURE);
+		if ( err == -1 )
+		{
+			perror("in write()");
+			exit(EXIT_FAILURE);
+		}
+
+		if ( err1 == -1 )
+		{
+			perror("in lseek()");
+			exit(EXIT_FAILURE);
+		}
 	}
 
 

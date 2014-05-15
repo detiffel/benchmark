@@ -3,7 +3,7 @@ bin_PROGRAMS = writev
 writev_SOURCES = writev.c
 writev_LDADD = $(top_builddir)/lib/libbenchmark.a $(AM_LDFLAGS)
 
-GRAPHS = writev.csv
+GRAPHS = writev.csv write+lseek.csv
 PROG   = writev
 TMP    = tmp.dat
 
