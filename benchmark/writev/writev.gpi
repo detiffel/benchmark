@@ -3,5 +3,5 @@ set xlabel 'size [byte]'
 set ylabel 'time [ns]'
 set key left top
 set logscale x
-plot 'malloc.csv' using 1:2 title 'malloc',\
+plot 'write+lseek.csv' using 1:2 title 'write+lseek',\
   'writev.csv' using 1:2 title 'writev'
