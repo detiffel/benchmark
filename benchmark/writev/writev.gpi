@@ -1,0 +1,7 @@
+set title 'Benchmark between use of writev or write+lseek'
+set xlabel 'size [byte]'
+set ylabel 'time [ns]'
+set key left top
+set logscale x
+plot 'malloc.csv' using 1:2 title 'malloc',\
+  'writev.csv' using 1:2 title 'writev'

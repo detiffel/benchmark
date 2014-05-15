@@ -1,0 +1,9 @@
+<p>
+Ce programme évalue le temps utilisé par writev pour écrire selon un pattern précis, par rapport à l'utilisation de write + lseek.
+
+
+	writev utilisera des buffers de taille définie dans lesquels seront copiés les strings d'une carte de visite.
+	write copiera directement les strings, puis utilisera lseek pour atteindre la zone où sera notée l'information suivante.
+	Pour faire apparaître les différences clairement, le fichier sera écrit 100 fois
+
+</p>

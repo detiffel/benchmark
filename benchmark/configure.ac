@@ -63,6 +63,7 @@ AC_CONFIG_FILES([tab/Makefile])
 AC_CONFIG_FILES([textbin/Makefile])
 AC_CONFIG_FILES([thread/Makefile])
 AC_CONFIG_FILES([types/Makefile])
+AC_CONFIG_FILES([writev/Makefile])
 
 AM_CONDITIONAL(OS_IS_MAC, [test $(uname -s) = Darwin])
 

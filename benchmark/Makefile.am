@@ -21,5 +21,6 @@ SUBDIRS =   \
 			pipe \
 			shm \
 			thread \
-			types
+			types \
+			writev
 			
