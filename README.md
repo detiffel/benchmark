@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Benchmark
 
 ## Introduction
@@ -94,3 +95,13 @@ dans le dossier gnuplot.
 
 Si vous avez l'erreur "required file `./ltmain.sh`" en faisant `./configure` ou `./bootstrap.sh`,
 assurez vous que votre dossier `gnuplot-4.6.5` n'est pas dans `benchmark` et vice versa.
+=======
+Projet 3 - SINF1252
+
+Ajout de benchmarks pour les appels systèmes.
+Benchmarks ajoutés : readdir, writev.
+
+Forked depuis https://github.com/fduchene/benchmark
+
+Voir benchmark/README.md pour l'usage des benchmarks.
+>>>>>>> 72abb65b530338101a47374ce2e2e7a5e5afd987

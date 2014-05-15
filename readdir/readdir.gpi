@@ -1,0 +1,9 @@
+set title 'Benchmark between readdir in small directory and biggest'
+set xlabel 'number of file'
+set ylabel 'time [ns]'
+set key left top
+set logscale x
+plot 'readdir.csv' using 1:2 title 'readdir'
+ 
+
+  
